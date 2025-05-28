@@ -1,21 +1,22 @@
 pipeline {
-    agent {
-        docker { image 'openjdk:17' }  // Runs build inside Java 17 container
-    }
+    agent any
+
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/rishavjais456/simple-addition-pipeline.git'
+                git url: 'https://github.com/rishavjais456/simple-addition-pipeline.git', branch: 'main'
             }
         }
-        stage('Compile Java') {
+
+        stage('Compile') {
             steps {
-                sh 'javac AddTwoNumbers.java'
+                sh 'javac Addition.java'
             }
         }
-        stage('Run Java Program') {
+
+        stage('Run') {
             steps {
-                sh 'java AddTwoNumbers'
+                sh 'java Addition'
             }
         }
     }
