@@ -2,17 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                echo 'Cloning repository...'
-                // Jenkins does this automatically
+                // Clone your GitHub repo with the Java file
+                git 'https://github.com/yourusername/your-java-repo.git'
             }
         }
-
-        stage('Run Addition Script') {
+        stage('Compile Java') {
             steps {
-                echo 'Running Python script...'
-                sh 'python3 add.py'  // use 'python' if Windows or Python2
+                // Compile the Java code
+                sh 'javac AddTwoNumbers.java'
+            }
+        }
+        stage('Run Java Program') {
+            steps {
+                // Run the compiled Java program and display output
+                sh 'java AddTwoNumbers'
             }
         }
     }
